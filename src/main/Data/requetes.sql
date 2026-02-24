@@ -16,3 +16,11 @@ FROM candidate c
                    ON c.id = v.candidate_id
                        AND v.vote_type = 'VALID'
 GROUP BY c.name;
+
+
+-- q4
+SELECT
+    COUNT(CASE WHEN vote_type = 'VALID' THEN 1 END) AS valid_count,
+    COUNT(CASE WHEN vote_type = 'BLANK' THEN 1 END) AS blank_count,
+    COUNT(CASE WHEN vote_type = 'NULL' THEN 1 END) AS null_count
+FROM vote;
