@@ -9,9 +9,9 @@ public class VoteTypeCount {
         this.voteType = voteType;
         this.count = count;
     }
-
     @Override
     public String toString() {
-        return voteType + "=" + count;
+        return "VoteTypeCount(voteType=" + voteType +
+                ", count=" + count + ")";
     }
 }

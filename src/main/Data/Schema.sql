@@ -55,3 +55,13 @@ INSERT INTO vote (candidate_id, voter_id, vote_type) VALUES
 SELECT * FROM candidate;
 SELECT * FROM voter;
 SELECT * FROM vote;
+
+
+DROP TABLE IF EXISTS vote CASCADE;
+DROP TABLE IF EXISTS voter CASCADE;
+DROP TABLE IF EXISTS candidate CASCADE;
+DROP TYPE IF EXISTS vote_type CASCADE;
+
+
+ALTER TABLE vote
+    ADD CONSTRAINT unique_voter UNIQUE (voter_id);
