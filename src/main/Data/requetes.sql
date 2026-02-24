@@ -24,3 +24,11 @@ SELECT
     COUNT(CASE WHEN vote_type = 'BLANK' THEN 1 END) AS blank_count,
     COUNT(CASE WHEN vote_type = 'NULL' THEN 1 END) AS null_count
 FROM vote;
+
+
+
+-- q5
+SELECT
+    (COUNT(DISTINCT voter_id)::decimal /
+     (SELECT COUNT(*) FROM voter)) * 100 AS turnout_rate
+FROM vote;
