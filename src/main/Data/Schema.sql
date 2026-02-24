@@ -24,3 +24,9 @@ CREATE TABLE vote (
                       voter_id INT NOT NULL REFERENCES voter(id),
                       vote_type vote_type NOT NULL
 );
+
+-- insertion des candidats
+INSERT INTO candidate (name) VALUES
+                                 ('Alice'),
+                                 ('Bob'),
+                                 ('Charlie');
