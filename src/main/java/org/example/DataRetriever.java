@@ -148,6 +148,24 @@ public class DataRetriever {
     }
 
 
+    public long countTotalVoters() {
+
+        String sql = "SELECT COUNT(*) FROM voter";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            if (rs.next()) {
+                return rs.getLong(1);
+            }
+            return 0;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 //q6 = trouver le gagnant
     public ElectionResult findWinner() {
 
