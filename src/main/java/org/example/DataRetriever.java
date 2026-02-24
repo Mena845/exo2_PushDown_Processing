@@ -122,4 +122,29 @@ public class DataRetriever {
         }
     }
 
+
+//q5 = taux de participation
+    public double computeTurnoutRate() {
+
+        String sql = """
+            SELECT
+                (COUNT(DISTINCT voter_id)::decimal /
+                 (SELECT COUNT(*) FROM voter)) * 100 AS turnout_rate
+            FROM vote
+        """;
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            if (rs.next()) {
+                return rs.getDouble("turnout_rate");
+            }
+            return 0;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
