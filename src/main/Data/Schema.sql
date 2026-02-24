@@ -7,3 +7,10 @@ CREATE TABLE candidate (
                            id SERIAL PRIMARY KEY,
                            name TEXT NOT NULL
 );
+
+
+-- creation de la table voter
+CREATE TABLE voter (
+                       id SERIAL PRIMARY KEY,
+                       name TEXT NOT NULL
+);
