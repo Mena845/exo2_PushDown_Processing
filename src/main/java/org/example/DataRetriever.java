@@ -91,4 +91,35 @@ public class DataRetriever {
         }
     }
 
+
+//q4 = synthese globale
+    public VoteSummary computeVoteSummary() {
+
+        String sql = """
+            SELECT
+                COUNT(CASE WHEN vote_type = 'VALID' THEN 1 END) AS valid_count,
+                COUNT(CASE WHEN vote_type = 'BLANK' THEN 1 END) AS blank_count,
+                COUNT(CASE WHEN vote_type = 'NULL' THEN 1 END) AS null_count
+            FROM vote
+        """;
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            if (rs.next()) {
+                return new VoteSummary(
+                        rs.getLong("valid_count"),
+                        rs.getLong("blank_count"),
+                        rs.getLong("null_count")
+                );
+            }
+
+            return null;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
